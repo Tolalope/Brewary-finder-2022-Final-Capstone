@@ -1,6 +1,11 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS breweries;
+DROP TABLE IF EXISTS brews;
+DROP TABLE IF EXISTS reviews;
+
+
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -8,6 +13,49 @@ CREATE TABLE users (
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
+);
+
+--Bender BrewFinder tables
+
+CREATE TABLE breweries (
+    brewery_id SERIAL,
+    brewer_id INT NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    phone_number VARCHAR(20) UNIQUE NOT NULL,
+    website VARCHAR(250) UNIQUE NOT NULL,
+    street VARCHAR(100),
+    city VARCHAR(100),
+    state VARCHAR(50),
+    hours_of_operation VARCHAR(250),
+    isActive boolean,
+    CONSTRAINT pk_brewery PRIMARY KEY (brewery_id),
+    CONSTRAINT fk_brewer FOREIGN KEY (brewer_id) REFERENCES users(user_id)
+    );
+
+CREATE TABLE brews (
+    beer_id SERIAL,
+    brewery_id INT NOT NULL,
+    beer_name VARCHAR(100) NOT NULL,
+    beer_description VARCHAR(250),
+    image VARCHAR(100),
+    abv decimal,
+    beer_type VARCHAR(100),
+    CONSTRAINT pk_beer PRIMARY KEY (beer_id),
+    CONSTRAINT fk_brewery FOREIGN KEY (brewery_id) REFERENCES breweries(brewery_id)
+);
+
+CREATE TABLE reviews (
+    review_id SERIAL,
+    user_id INT NOT NULL,
+    beer_id INT NOT NULL,
+    beer_name VARCHAR(100) NOT NULL,
+    brewery_name VARCHAR(250) NOT NULL,
+    description VARCHAR(500),
+    rating INT NOT NULL
+    CONSTRAINT ck_rating CHECK (rating <= 5),
+    CONSTRAINT pk_review PRIMARY KEY (review_id),
+    CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES users(user_id),
+    CONSTRAINT fk_review_beer FOREIGN KEY (beer_id) REFERENCES brews(beer_id)
 );
 
 COMMIT TRANSACTION;
