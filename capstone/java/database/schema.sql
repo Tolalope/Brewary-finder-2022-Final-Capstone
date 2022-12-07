@@ -27,10 +27,10 @@ CREATE TABLE breweries (
     city VARCHAR(100),
     state VARCHAR(50),
     CONSTRAINT pk_brewery PRIMARY KEY (brewery_id),
-    CONSTRAINT fk_brewer FOREIGN KEY (brewer_id) REFERENCES users(user_id)
+    CONSTRAINT fk_breweries FOREIGN KEY (brewer_id) REFERENCES users(user_id)
     );
 
-CREATE TABLE brews (
+CREATE TABLE beers (
     beer_id SERIAL,
     brewery_id INT NOT NULL,
     beer_name VARCHAR(100) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE brews (
     abv decimal,
     beer_type VARCHAR(100),
     CONSTRAINT pk_beer PRIMARY KEY (beer_id),
-    CONSTRAINT fk_brewery FOREIGN KEY (brewery_id) REFERENCES breweries(brewery_id)
+    CONSTRAINT fk_breweries FOREIGN KEY (brewery_id) REFERENCES breweries(brewery_id)
 );
 
 CREATE TABLE reviews (
@@ -53,7 +53,7 @@ CREATE TABLE reviews (
     CONSTRAINT ck_rating CHECK (rating <= 5),
     CONSTRAINT pk_review PRIMARY KEY (review_id),
     CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES users(user_id),
-    CONSTRAINT fk_review_beer FOREIGN KEY (beer_id) REFERENCES brews(beer_id)
+    CONSTRAINT fk_review_beer FOREIGN KEY (beer_id) REFERENCES beers(beer_id)
 );
 
 COMMIT TRANSACTION;

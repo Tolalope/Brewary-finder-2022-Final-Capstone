@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Brewery;
+import com.techelevator.model.Beers;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -36,6 +37,9 @@ public class JdbcBreweryDao implements BreweryDao{
         jdbcTemplate.update(insertBrewerySql,brewery.getId(), brewery.getName(), brewery.getStreet(),
                 brewery.getCity(), brewery.getState(), brewery.getPhone(), brewery.getUrl());
     }
+
+
+
     private Brewery mapRowToBrewery(SqlRowSet results) {
         Brewery brewery = new Brewery();
         brewery.setId(results.getString("brewery_id"));
