@@ -71,5 +71,17 @@ public class Brewery {
     }
 
 
+    public Brewery(String id, String name, String street, String city, String state, String phone, String url) {
+        this.id = id;
+        this.name = name;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.phone = phone;
+        this.url = url;
+    }
 
+    public Brewery() {
+
+    }
 }

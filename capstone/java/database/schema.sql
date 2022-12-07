@@ -19,15 +19,13 @@ CREATE TABLE users (
 
 CREATE TABLE breweries (
     brewery_id SERIAL,
-    brewer_id INT NOT NULL,
+    brewer_id INT,
     name VARCHAR(250) NOT NULL,
-    phone_number VARCHAR(20) UNIQUE NOT NULL,
-    website VARCHAR(250) UNIQUE NOT NULL,
+    phone VARCHAR(20) UNIQUE NOT NULL,
+    url VARCHAR(250) UNIQUE NOT NULL,
     street VARCHAR(100),
     city VARCHAR(100),
     state VARCHAR(50),
-    hours_of_operation VARCHAR(250),
-    isActive boolean,
     CONSTRAINT pk_brewery PRIMARY KEY (brewery_id),
     CONSTRAINT fk_brewer FOREIGN KEY (brewer_id) REFERENCES users(user_id)
     );
