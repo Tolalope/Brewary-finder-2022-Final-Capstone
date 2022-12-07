@@ -32,7 +32,7 @@ CREATE TABLE breweries (
 
 CREATE TABLE beers (
     beer_id SERIAL,
-    brewery_id INT NOT NULL,
+    brewery_id INT,
     beer_name VARCHAR(100) NOT NULL,
     beer_description VARCHAR(250),
     image VARCHAR(100),

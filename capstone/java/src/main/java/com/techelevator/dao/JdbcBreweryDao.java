@@ -19,7 +19,7 @@ public class JdbcBreweryDao implements BreweryDao{
     @Override
     public List<Brewery> listAll() {
         List<Brewery> breweries = new ArrayList<>();
-        String sql = "SELECT  brewery_id, name, street, city, state, phone, url" +
+        String sql = "SELECT brewery_id, name, street, city, state, phone, url" +
                      "FROM breweries";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -33,11 +33,61 @@ public class JdbcBreweryDao implements BreweryDao{
     @Override
     public void createBrewery(Brewery brewery) {
         String insertBrewerySql = "INSERT INTO breweries (brewery_id, name, street, city, state, phone, url " +
-                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(insertBrewerySql,brewery.getId(), brewery.getName(), brewery.getStreet(),
                 brewery.getCity(), brewery.getState(), brewery.getPhone(), brewery.getUrl());
     }
 
+    @Override
+    public void updateBrewery(Brewery brewery) {
+        String updateBrewerySql = "UPDATE breweries " +
+                "SET name = ?, street = ?, city = ?, state = ?, phone = ?, url = ? " +
+                "WHERE brewery_id = ?";
+        jdbcTemplate.update(updateBrewerySql, brewery.getName(), brewery.getStreet(), brewery.getCity(), brewery.getState(), brewery.getPhone(), brewery.getUrl());
+
+    }
+
+    @Override
+    public boolean searchForBrewery(String name) {
+        String searchForBrewerySql = "SELECT brewery_id, name, street, city, state, phone, url" +
+                "FROM breweries " +
+                "WHERE name = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(searchForBrewerySql, name);
+        if(results.next()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public Brewery getBreweryById(int id) {
+        Brewery brewery = new Brewery();
+        String getBreweryByIdSql = "SELECT brewery_id, name, street, city, state, phone, url " +
+                "FROM breweries " +
+                "WHERE brewery_id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(getBreweryByIdSql, id);
+        if(results.next()) {
+            brewery = mapRowToBrewery(results);
+        }
+
+        return brewery;
+    }
+
+    @Override
+    public Brewery getBreweryByName(String name) {
+        Brewery brewery = new Brewery();
+        String getBreweryByNameSql = "SELECT brewery_id, name, street, city, state, phone, url " +
+                "WHERE name = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(getBreweryByNameSql, name);
+        if(results.next()) {
+            brewery = mapRowToBrewery(results);
+        }
+        return brewery;
+    }
 
 
     private Brewery mapRowToBrewery(SqlRowSet results) {
