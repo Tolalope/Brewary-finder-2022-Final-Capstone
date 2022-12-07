@@ -8,14 +8,18 @@ import org.springframework.web.client.RestTemplate;
 
 public class BreweryAPI {
 
-    private static final String API_BASE_URL = "http://localhost:9000/";
+    private static final String API_BASE_URL = "https://api.openbrewerydb.org/";
     private final RestTemplate restTemplate = new RestTemplate();
 
 
-    public Brewery[] getBreweries() {
+    public Brewery[] getBreweries(String zip) {
         Brewery[] Breweries = null;
         try {
-            Breweries = restTemplate.getForObject(API_BASE_URL + "breweries", Brewery[].class);
+            String url = API_BASE_URL + "breweries?";
+            if (zip.length() > 0) {
+                url += "by_postal=" + zip;
+            }
+            Breweries = restTemplate.getForObject(url, Brewery[].class);
         } catch (RestClientResponseException | ResourceAccessException e) {
 
         }
