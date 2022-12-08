@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>Finding Breweries</p>
     <view-breweries/>
   </div>
 </template>
@@ -17,3 +16,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.home {
+  color: whitesmoke;
+}
+
+</style>

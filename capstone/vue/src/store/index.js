@@ -17,7 +17,8 @@ if(currentToken != null) {
 }
 
 export default new Vuex.Store({
-  state: {
+  state: { 
+    breweries: [],
     token: currentToken || '',
     user: currentUser || {}
   },

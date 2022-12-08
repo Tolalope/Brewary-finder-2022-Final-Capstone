@@ -75,7 +75,7 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            console.log(response.data.user.authorities[0].name);
+            
             if (response.data.user.authorities[0].name == "ROLE_BREWER") {
               this.$router.push({ name: "breweries" });
             } else if (
