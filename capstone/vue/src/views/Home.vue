@@ -1,12 +1,19 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <p>Finding Breweries</p>
+    <view-breweries/>
   </div>
 </template>
 
 <script>
+import ViewBreweries from '@/components/ViewBreweries.vue'
+
+
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    ViewBreweries
+  }
 };
 </script>
