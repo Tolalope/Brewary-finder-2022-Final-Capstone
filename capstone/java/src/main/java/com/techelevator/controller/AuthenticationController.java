@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.techelevator.model.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -60,5 +61,31 @@ public class AuthenticationController {
         }
     }
 
+    static class LoginResponse
+    {
+
+    private String token;
+    private User user;
+
+    LoginResponse(String token, User user)
+    {
+        this.token = token;
+        this.user=user;
+    }
+    @JsonProperty("token")
+        String getToken()
+    {
+        return token;
+    }
+    void setToken(String token)
+    {
+        this.token = token;
+    }
+    @JsonProperty("user")
+        public User getUser()
+    {
+        return user;
+    }
+    }
 }
 
