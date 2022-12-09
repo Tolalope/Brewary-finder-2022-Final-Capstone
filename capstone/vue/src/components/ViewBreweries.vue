@@ -10,7 +10,7 @@
 <div>
                 
                   <Label for="breweryName" class="sr-only">Brewery Name</Label>
-                  <Input
+                  <input
                     id="breweryName"
                     name="breweryName"
 
@@ -26,22 +26,23 @@
                 <div>
                 
                   <Label for="breweryZip" class="sr-only">Zip Code</Label>
-                  <Input
+                  <input
                     id="breweryZip"
                     name="breweryZip"
                     type="text"
                     className="form-control"
                     required
                     autofocus
+                    v-model="zip"
                   />
-                  <button id="breweryZip" type="submit">Submit</button>
+                  <button id="breweryZip" v-on:click="getBreweries">Submit</button>
                 
                 </div>
 
                 <div>
                 
                   <Label for="breweryState" class="sr-only">State</Label>
-                  <Input
+                  <input
                     id="breweryState"
                     name="breweryState"
                      type="text"
@@ -55,7 +56,7 @@
                 <div>
                 
                   <Label for="breweryCity" class="sr-only">City</Label>
-                  <Input
+                  <input
                     id="breweryCity"
                     name="breweryCity"
                     type="text"
@@ -84,21 +85,29 @@ export default {
     name: "view-breweries",
     data(){
         return {
-            breweries: []
+            breweries: [],
+            zip: ""
         }
 
         
     },
-    
-    created(){
-
-        BreweryService.getBreweries("?").then(
+    methods: {
+        getBreweries() {
+            BreweryService.getBreweries(this.zip).then(
             (response) => {
 
                 this.breweries = response.data
             } 
-        )
+        )  
+        }
 
+
+
+    },
+    created(){
+
+        this.getBreweries() 
+        
     }
 
 
