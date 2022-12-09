@@ -27,8 +27,11 @@ public class BreweryController {
     }
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/searchBreweries", method = RequestMethod.GET)
-    public Brewery[] searchBreweries(@RequestParam(defaultValue = "", required = false) String zip) {
+    public Brewery[] searchBreweries(@RequestParam(defaultValue = "", required = false) String zip,
+                                     @RequestParam(defaultValue = "", required = false) String name,
+                                     @RequestParam(defaultValue = "", required = false) String city,
+                                     @RequestParam(defaultValue = "", required = false) String state) {
         BreweryAPI api = new BreweryAPI();
-        return api.getBreweries(zip);
+        return api.getBreweries(zip, name, city, state);
     }
 }

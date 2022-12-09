@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Brewery {
 
-    private String id;
+    private int id;
     private String name;
     private String street;
     private String city;
@@ -14,11 +14,11 @@ public class Brewery {
     @JsonProperty ("website_url")
     private String url;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -71,7 +71,7 @@ public class Brewery {
     }
 
 
-    public Brewery(String id, String name, String street, String city, String state, String phone, String url) {
+    public Brewery(int id, String name, String street, String city, String state, String phone, String url) {
         this.id = id;
         this.name = name;
         this.street = street;

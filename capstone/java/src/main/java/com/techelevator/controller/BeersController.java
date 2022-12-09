@@ -13,7 +13,6 @@ import java.util.List;
 @CrossOrigin
 
 public class BeersController {
-    @Autowired
     private BeersDao beersDao;
 
     @PostMapping("/beers")

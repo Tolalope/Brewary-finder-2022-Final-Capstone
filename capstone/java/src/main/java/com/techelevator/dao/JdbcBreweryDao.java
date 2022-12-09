@@ -16,6 +16,8 @@ public class JdbcBreweryDao implements BreweryDao{
 
     public JdbcBreweryDao(JdbcTemplate jdbcTemplate){ this.jdbcTemplate = jdbcTemplate; }
 
+    private BeersDao beersDao;
+
     @Override
     public List<Brewery> listAll() {
         List<Brewery> breweries = new ArrayList<>();
@@ -32,9 +34,11 @@ public class JdbcBreweryDao implements BreweryDao{
     }
     @Override
     public void createBrewery(Brewery brewery) {
-        String insertBrewerySql = "INSERT INTO breweries (brewery_id, name, street, city, state, phone, url " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(insertBrewerySql,brewery.getId(), brewery.getName(), brewery.getStreet(),
+        String insertBrewerySql = "INSERT INTO breweries (name, street, city, state, phone, url " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) " +
+                "RETURNING brewery_id";
+        Integer newBreweryId;
+        newBreweryId = jdbcTemplate.queryForObject(insertBrewerySql, Integer.class, brewery.getId(), brewery.getName(), brewery.getStreet(),
                 brewery.getCity(), brewery.getState(), brewery.getPhone(), brewery.getUrl());
     }
 
@@ -92,7 +96,7 @@ public class JdbcBreweryDao implements BreweryDao{
 
     private Brewery mapRowToBrewery(SqlRowSet results) {
         Brewery brewery = new Brewery();
-        brewery.setId(results.getString("brewery_id"));
+        brewery.setId(results.getInt("brewery_id"));
         brewery.setName(results.getString("name"));
         brewery.setStreet(results.getString("street"));
         brewery.setCity(results.getString("city"));

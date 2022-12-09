@@ -1,5 +1,5 @@
 h1 {
-    color: blue;
+    color:ghostwhite;
 }
 
 body {
@@ -9,5 +9,9 @@ body {
   background-repeat: no-repeat;
 }
 
+#brewery-list {
+  height: 300px;
+  overflow:scroll;
+}
 
 

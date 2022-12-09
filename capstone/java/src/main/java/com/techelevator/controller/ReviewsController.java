@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ReviewsController {
 
-    @Autowired
+
     private ReviewsDao reviewsDao;
 
     @PreAuthorize("hasAnyRole('ROLE_USER')")

@@ -3,12 +3,14 @@
  <div>
       
 
-      <h2>View Breweries</h2>
+      <h2>List of Breweries</h2>
+      <div id = "brewery-list">
       <p v-for="brewery in breweries" v-bind:key="brewery.id">{{brewery.name}}</p>
+      </div>
 
 
 <div>
-                
+                <h2>Search for Breweries</h2>
                   <Label for="breweryName" class="sr-only">Brewery Name</Label>
                   <input
                     id="breweryName"
@@ -18,8 +20,9 @@
                     className="form-control"
                     required
                     autofocus
+                    v-model="name"
                   />
-                  <button id="breweryName" type="submit">Submit</button>
+                  <button id="breweryName" v-on:click="getBreweries">Submit</button>
                 
                 </div>
 
@@ -49,8 +52,9 @@
                     className="form-control"
                     required
                     autofocus
+                    v-model="state"
                   />
-                <button id="breweryState" type="submit">Submit</button>
+                <button id="breweryState" v-on:click="getBreweries">Submit</button>
                 </div>
 
                 <div>
@@ -63,8 +67,9 @@
                     className="form-control"
                     required
                     autofocus
+                    v-model="city"
                   />
-                  <button id="breweryCity" type="submit">Submit</button>
+                  <button id="breweryCity" v-on:click="getBreweries">Submit</button>
                 
                 </div>
       
@@ -86,14 +91,26 @@ export default {
     data(){
         return {
             breweries: [],
-            zip: ""
+            zip: "",
+            name: "",
+            city: "",
+            state: ""
         }
 
         
     },
     methods: {
+        viewBreweries() {
+            BreweryService.viewBreweries().then(
+            (response) => {
+
+                this.breweries = response.data
+            } 
+        )  
+        },
+
         getBreweries() {
-            BreweryService.getBreweries(this.zip).then(
+            BreweryService.getBreweries(this.zip, this.name, this.city, this.state).then(
             (response) => {
 
                 this.breweries = response.data
@@ -105,7 +122,7 @@ export default {
 
     },
     created(){
-
+        this.viewBreweries(),
         this.getBreweries() 
         
     }
