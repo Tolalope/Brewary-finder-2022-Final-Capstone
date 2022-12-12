@@ -45,12 +45,12 @@ CREATE TABLE beers (
 
 -- Breweries_beers table
 CREATE TABLE breweries_beers (
-    breweries_id int NOT NULL,
+    brewery_id int NOT NULL,
     beer_id int NOT NULL,
-    CONSTRAINT PK_breweries_beers PRIMARY KEY (breweries_id, beer_id),
-    CONSTRAINT FK_breweries_breweries_beers FOREIGN KEY (breweries_id) REFERENCES breweries (breweries_id),
+    CONSTRAINT PK_breweries_beers PRIMARY KEY (brewery_id, beer_id),
+    CONSTRAINT FK_breweries_breweries_beers FOREIGN KEY (brewery_id) REFERENCES breweries (brewery_id),
     CONSTRAINT FK_beers_breweries_beers FOREIGN KEY (beer_id) REFERENCES beers (beer_id)
-)
+);
 
 CREATE TABLE reviews (
     review_id SERIAL,

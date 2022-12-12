@@ -96,7 +96,7 @@ public class JdbcBreweryDao implements BreweryDao{
 
     private Brewery mapRowToBrewery(SqlRowSet results) {
         Brewery brewery = new Brewery();
-        brewery.setId(results.getInt("brewery_id"));
+        brewery.setId(results.getString("brewery_id"));
         brewery.setName(results.getString("name"));
         brewery.setStreet(results.getString("street"));
         brewery.setCity(results.getString("city"));

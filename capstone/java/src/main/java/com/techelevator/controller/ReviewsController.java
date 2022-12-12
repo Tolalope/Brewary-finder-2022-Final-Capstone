@@ -24,7 +24,7 @@ public class ReviewsController {
          reviewsDao.insertReview(review);
     }
 
-    @GetMapping("/beer/{id}/reviews")
+    @GetMapping("/beers/{id}/reviews")
     public List<Reviews> searchReviewsByBeerId(@PathVariable int beerId) {
         return reviewsDao.searchReviewsByBeerId(beerId);
     }

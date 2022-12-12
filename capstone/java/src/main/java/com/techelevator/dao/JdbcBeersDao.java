@@ -3,10 +3,12 @@ package com.techelevator.dao;
 import com.techelevator.model.Beers;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcBeersDao implements BeersDao{
     private JdbcTemplate jdbcTemplate;
 
@@ -31,7 +33,7 @@ public class JdbcBeersDao implements BeersDao{
         String sqlSelectBeerByName = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
                 "FROM beers " +
                 "WHERE beer_name = ?";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelectBeerByName, name);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelectBeerByName, name.toUpperCase());
 
         if(result.next()) {
             beer = mapRowToBeers(result);
