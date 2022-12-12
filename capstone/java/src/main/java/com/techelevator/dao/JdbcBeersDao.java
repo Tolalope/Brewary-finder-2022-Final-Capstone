@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Beers;
+import com.techelevator.model.Brewery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -56,12 +57,12 @@ public class JdbcBeersDao implements BeersDao{
     }
 
     @Override
-    public boolean searchForBeersByName(String name) {
+    public boolean searchForBeersByName(String beerName) {
         String sqlSearchForBeer = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
                 "FROM beers " +
-                "WHERE UPPER(beer_name) = ?";
+                "WHERE beer_name = UPPER('?')";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForBeer, name.toUpperCase());
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForBeer, beerName.toUpperCase());
         if(results.next()) {
             return true;
         } else {
@@ -71,16 +72,24 @@ public class JdbcBeersDao implements BeersDao{
 
     @Override
     public void insertBeers(Beers newBeers) {
-        String sqlAddBeer = "INSERT INTO beers(beer_name, beer_description, image, abv, beer_type) " +
+        String sqlInsertBeer = "INSERT INTO beers(beer_name, beer_description, image, abv, beer_type) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sqlAddBeer, newBeers.getBeerName(), newBeers.getBeerDescription(), newBeers.getImage(), newBeers.getAbv(), newBeers.getBeerType());
+        jdbcTemplate.update(sqlInsertBeer, newBeers.getBeerName(), newBeers.getBeerDescription(), newBeers.getImage(), newBeers.getAbv(), newBeers.getBeerType());
+    }
+
+    @Override
+    public void insertBeersToBrewery(int breweryId, int beerId) {
+        String sqlInsertBeersToBrewery = "INSERT INTO breweries_beers(brewery_id, beer_id) " +
+                "VALUES (?, ?)";
+
+        jdbcTemplate.update(sqlInsertBeersToBrewery, breweryId, beerId);
     }
 
     @Override
     public List<Beers> getAllBeersByBrewery(int breweryId) {
         List<Beers> breweryBeerList = new ArrayList<>();
-        String sqlSelectBeerByBrewery = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
+        String sqlSelectBeerByBrewery = "SELECT beers.beer_id, beer_name, beer_description, image, abv, beer_type " +
                 "FROM beers " +
                 "JOIN breweries_beers ON breweries_beers.beer_id = beers.beer_id " +
                 "WHERE brewery_id = ?";

@@ -54,13 +54,19 @@ public class JdbcReviewsDao implements ReviewsDao {
     }
 
     @Override
-    public void getReview(int reviewId) {
+    public Reviews getReview(int reviewId) {
+        Reviews review = new Reviews();
 
         String getReviewSql = "SELECT review_id, user_id, beer_id, brewery_id, description, rating " +
                 "FROM reviews " +
                 "WHERE review_id = ?";
 
-        jdbcTemplate.queryForRowSet(getReviewSql, reviewId);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(getReviewSql, reviewId);
+        if(results.next()) {
+            review = mapRowToReview(results);
+        }
+
+        return review;
     }
 
     private Reviews mapRowToReview(SqlRowSet results) {

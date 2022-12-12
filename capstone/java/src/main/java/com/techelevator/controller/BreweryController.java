@@ -22,11 +22,15 @@ public class BreweryController {
     @Autowired
     private UserDao userDao;
 
+    /*
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/breweries", method = RequestMethod.GET)
     public List<Brewery> breweries() {
         return breweryDao.getAllBreweries();
     }
+
+     */
+
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/search-breweries", method = RequestMethod.GET)
     public Brewery[] searchBreweries(@RequestParam(defaultValue = "", required = false) String zip,

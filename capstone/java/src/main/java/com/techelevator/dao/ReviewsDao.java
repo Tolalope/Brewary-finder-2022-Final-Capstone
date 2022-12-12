@@ -12,6 +12,6 @@ public interface ReviewsDao {
 
     public List<Reviews> searchReviewsByBreweryId(int breweryId);
 
-    public void getReview(int reviewId);
+    public Reviews getReview(int reviewId);
 
 }
