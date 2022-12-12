@@ -6,13 +6,26 @@ public class Brewery {
 
     private int id;
     private String name;
+    private String phone;
+    @JsonProperty ("website_url")
+    private String url;
     private String street;
     private String city;
     private String state;
-    private String phone;
 
-    @JsonProperty ("website_url")
-    private String url;
+    public Brewery() {
+
+    }
+    public Brewery(int id, String name, String phone, String url, String street, String city, String state) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.url = url;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+
+    }
 
     public int getId() {
         return id;
@@ -70,18 +83,4 @@ public class Brewery {
         this.url = url;
     }
 
-
-    public Brewery(int id, String name, String street, String city, String state, String phone, String url) {
-        this.id = id;
-        this.name = name;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.phone = phone;
-        this.url = url;
-    }
-
-    public Brewery() {
-
-    }
 }

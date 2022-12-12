@@ -5,10 +5,9 @@ import com.techelevator.model.Brewery;
 import java.util.List;
 
 public interface BreweryDao {
+    public List<Brewery> getAllBreweries();
 
-    public List<Brewery> listAll();
-
-    public void createBrewery(Brewery brewery);
+    public void insertBrewery(Brewery brewery);
 
     public void updateBrewery(Brewery brewery);
 

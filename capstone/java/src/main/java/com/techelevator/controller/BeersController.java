@@ -2,7 +2,6 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.BeersDao;
 import com.techelevator.model.Beers;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,8 +15,8 @@ public class BeersController {
     private BeersDao beersDao;
 
     @PostMapping("/beers")
-    public void saveBeers(@RequestBody @Valid Beers beers) {
-        beersDao.saveBeers(beers);
+    public void addBeers(@RequestBody @Valid Beers beers) {
+        beersDao.insertBeers(beers);
     }
 
     @GetMapping("/beers")
@@ -36,15 +35,13 @@ public class BeersController {
     }
 
     @GetMapping("/breweries/beers/{id}")
-    public List<Beers> getBeersByBrewery(@PathVariable int breweryId) {
-        return beersDao.getBeersByBrewery(breweryId);
+    public List<Beers> getAllBeersByBrewery(@PathVariable int breweryId) {
+        return beersDao.getAllBeersByBrewery(breweryId);
     }
 
     @DeleteMapping("/beers/{id}")
-    public void removeBeers(@PathVariable int beerId) {
-        beersDao.removeBeers(beerId);
+    public void deleteBeers(@PathVariable int beerId) {
+        beersDao.deleteBeers(beerId);
     }
 
 }
-
-// Are we adding getAllBeersByBrewery from BeersDAO??

@@ -7,8 +7,7 @@ public class Reviews {
     private int reviewId;
     private int userId;
     private int beerId;
-    private String beerName;
-    private String breweryName;
+    private int breweryId;
     private String description;
     @Min(value = 1, message = "Rating must be between 1 and 5.")
     @Max(value = 5, message = "Rating must be between 1 and 5.")
@@ -18,12 +17,11 @@ public class Reviews {
     public Reviews() {
     }
 
-    public Reviews(int reviewId, int userId, int beerId, String beerName, String breweryName, String description, int rating) {
+    public Reviews(int reviewId, int userId, int beerId, int breweryId, String description, int rating) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.beerId = beerId;
-        this.beerName = beerName;
-        this.breweryName = breweryName;
+        this.breweryId = breweryId;
         this.description = description;
         this.rating = rating;
     }
@@ -52,20 +50,12 @@ public class Reviews {
         this.beerId = beerId;
     }
 
-    public String getBeerName() {
-        return beerName;
+    public int getBreweryId() {
+        return breweryId;
     }
 
-    public void setBeerName(String beerName) {
-        this.beerName = beerName;
-    }
-
-    public String getBreweryName() {
-        return breweryName;
-    }
-
-    public void setBreweryName(String breweryName) {
-        this.breweryName = breweryName;
+    public void setBreweryId(int breweryId) {
+        this.breweryId = breweryId;
     }
 
     public String getDescription() {

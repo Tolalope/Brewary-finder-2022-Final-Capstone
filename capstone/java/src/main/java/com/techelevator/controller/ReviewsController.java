@@ -21,7 +21,7 @@ public class ReviewsController {
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PostMapping("/beers/reviews")
     public void saveReview(@RequestBody Reviews review) {
-         reviewsDao.saveReview(review);
+         reviewsDao.insertReview(review);
     }
 
     @GetMapping("/beer/{id}/reviews")

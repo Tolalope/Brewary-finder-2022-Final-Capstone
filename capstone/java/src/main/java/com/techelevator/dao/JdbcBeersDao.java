@@ -15,9 +15,9 @@ public class JdbcBeersDao implements BeersDao{
     @Override
     public List<Beers> getAllBeers() {
         List<Beers> allBeers = new ArrayList<>();
-        String sqlSelectAllBeers = "SELECT * FROM beers LEFT JOIN (SELECT beer_id, AVG(rating)AS avg_rating FROM reviews GROUP BY beer_id) AS rating " +
-                "ON rating.beer_id = beers.beer_id WHERE name =? GROUP BY beers.beer_id, avg_rating ORDER BY name ";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectAllBeers, true);
+        String sqlSelectAllBeers = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
+                "FROM beers";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectAllBeers);
 
         while(results.next()) {
             allBeers.add(mapRowToBeers(results));
@@ -27,43 +27,37 @@ public class JdbcBeersDao implements BeersDao{
 
     @Override
     public Beers getBeersByName(String name) {
-        Beers newBeers = new Beers();
-        String sqlSelectBeerByName = "SELECT * FROM beers LEFT JOIN (SELECT beer_id, AVG(rating)AS avg_rating FROM reviews GROUP BY beer_id)AS rating " +
-                "ON rating.beer_id = beers.beer_id WHERE name =? GROUP BY beers.beer_id, rating.beer_id, avg_rating ORDER BY name";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelectBeerByName, name, true);
+        Beers beer = new Beers();
+        String sqlSelectBeerByName = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
+                "FROM beers " +
+                "WHERE beer_name = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelectBeerByName, name);
 
         if(result.next()) {
-            newBeers = mapRowToBeers(result);
+            beer = mapRowToBeers(result);
         }
-        return newBeers;    }
-
-    @Override
-    public List<Beers> getBeersByBrewery(int breweryId) {
-        List<Beers> breweryBeerList = new ArrayList<>();
-        String sqlSelectBeerByBrewery = "SELECT * FROM beers LEFT JOIN (SELECT beer_id, AVG(rating)AS avg_rating FROM reviews GROUP BY beer_id)AS rating " +
-                "ON rating.beer_id = beers.beer_id WHERE brewery_id = ? GROUP BY beers.beer_id, rating.beer_id, avg_rating ORDER BY name";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectBeerByBrewery, breweryId, true);
-        while(results.next()) {
-            breweryBeerList.add(mapRowToBeers(results));
-        }
-        return breweryBeerList;    }
+        return beer;
+    }
 
     @Override
     public Beers getBeersById(int beerId) {
-        Beers beer = null;
+        Beers beer = new Beers();
 
-        String sqlgetBeersById = "SELECT * FROM beers LEFT JOIN (SELECT beer_id, AVG(rating)AS avg_rating FROM reviews GROUP BY beer_id)AS rating " +
-                "ON rating.beer_id = beers.beer_id WHERE beers.beer_id =? GROUP BY beers.beer_id, rating.beer_id, avg_rating ORDER BY name";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sqlgetBeersById, beerId, true);
-        while(result.next()) {
-            beer = mapRowToBeers(result);
+        String sqlGetBeersById = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
+                "FROM beers " +
+                "WHERE beer_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetBeersById, beerId);
+        if(results.next()) {
+            beer = mapRowToBeers(results);
         }
-        return beer;    }
+        return beer;
+    }
 
     @Override
     public boolean searchForBeersByName(String name) {
-        String sqlSearchForBeer = "SELECT * FROM beers LEFT JOIN (SELECT beer_id, AVG(rating)AS avg_rating FROM reviews GROUP BY beer_id)AS rating " +
-                "ON rating.beer_id = beers.beer_id WHERE UPPER(name) = ? GROUP BY beers.beer_id, rating.beer_id, avg_rating ORDER BY name";
+        String sqlSearchForBeer = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
+                "FROM beers " +
+                "WHERE UPPER(beer_name) = ?";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForBeer, name.toUpperCase());
         if(results.next()) {
@@ -74,26 +68,34 @@ public class JdbcBeersDao implements BeersDao{
     }
 
     @Override
-    public void saveBeers(Beers newBeers) {
-        jdbcTemplate.update("INSERT INTO beers(name, abv, ibu, type, info, img_url, brewery_id, is_active) VALUES (?,?,?,?,?,?,?,?)",
-                newBeers.getBeerName(), newBeers.getAbv(), newBeers.getBeerType(), newBeers.getBeerDescription(), newBeers.getImage(), newBeers.getBreweryId());
+    public void insertBeers(Beers newBeers) {
+        String sqlAddBeer = "INSERT INTO beers(beer_name, beer_description, image, abv, beer_type) " +
+                "VALUES (?, ?, ?, ?, ?)";
+
+        jdbcTemplate.update(sqlAddBeer, newBeers.getBeerName(), newBeers.getBeerDescription(), newBeers.getImage(), newBeers.getAbv(), newBeers.getBeerType());
     }
 
     @Override
     public List<Beers> getAllBeersByBrewery(int breweryId) {
         List<Beers> breweryBeerList = new ArrayList<>();
-        String sqlSelectBeerByBrewery = "SELECT * FROM beers LEFT JOIN (SELECT beer_id, AVG(rating)AS avg_rating FROM reviews GROUP BY beer_id)AS rating " +
-                "ON rating.beer_id = beers.beer_id WHERE brewery_id = ? GROUP BY beers.beer_id, rating.beer_id, avg_rating ORDER BY name";
+        String sqlSelectBeerByBrewery = "SELECT beer_id, beer_name, beer_description, image, abv, beer_type " +
+                "FROM beers " +
+                "JOIN breweries_beers ON breweries_beers.beer_id = beers.beer_id " +
+                "WHERE brewery_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectBeerByBrewery, breweryId);
 
         while(results.next()) {
             breweryBeerList.add(mapRowToBeers(results));
         }
-        return breweryBeerList;    }
+        return breweryBeerList;
+    }
 
     @Override
-    public void removeBeers(int beerId) {
-        jdbcTemplate.update("DELETE FROM beers WHERE beer_id = ?", beerId);
+    public void deleteBeers(int beerId) {
+        String sqlDeleteBeer = "DELETE FROM beers " +
+                "WHERE beer_id = ?";
+
+        jdbcTemplate.update(sqlDeleteBeer, beerId);
     }
 
     private Beers mapRowToBeers(SqlRowSet row) {
@@ -101,11 +103,10 @@ public class JdbcBeersDao implements BeersDao{
 
         newBeer.setBeerId(row.getInt("beer_id"));
         newBeer.setBeerName(row.getString("beer_name").toUpperCase());
-        newBeer.setAbv(row.getDouble("abv"));
-        newBeer.setBeerType(row.getString("beer_type"));
         newBeer.setBeerDescription(row.getString("beer_description"));
         newBeer.setImage(row.getString("image"));
-        newBeer.setBreweryId(row.getInt("brewery_id"));
+        newBeer.setAbv(row.getDouble("abv"));
+        newBeer.setBeerType(row.getString("beer_type"));
 
         return newBeer;
     }

@@ -19,7 +19,7 @@ public class JdbcBreweryDao implements BreweryDao{
     private BeersDao beersDao;
 
     @Override
-    public List<Brewery> listAll() {
+    public List<Brewery> getAllBreweries() {
         List<Brewery> breweries = new ArrayList<>();
         String sql = "SELECT brewery_id, name, street, city, state, phone, url" +
                      "FROM breweries";
@@ -33,7 +33,7 @@ public class JdbcBreweryDao implements BreweryDao{
         return breweries;
     }
     @Override
-    public void createBrewery(Brewery brewery) {
+    public void insertBrewery(Brewery brewery) {
         String insertBrewerySql = "INSERT INTO breweries (name, street, city, state, phone, url " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?) " +
                 "RETURNING brewery_id";

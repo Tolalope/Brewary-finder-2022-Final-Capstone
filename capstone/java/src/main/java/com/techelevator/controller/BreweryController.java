@@ -23,7 +23,7 @@ public class BreweryController {
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/breweries", method = RequestMethod.GET)
     public List<Brewery> breweries() {
-        return breweryDao.listAll();
+        return breweryDao.getAllBreweries();
     }
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/searchBreweries", method = RequestMethod.GET)

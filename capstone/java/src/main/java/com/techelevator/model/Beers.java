@@ -3,25 +3,22 @@ package com.techelevator.model;
 public class Beers {
     private int beerId;
     private String beerName;
-    private double abv;
-    private String beerType;
     private String beerDescription;
     private String image;
-    private int breweryId;
-
-
-    public Beers(int beerId, String beerName, double abv, String beerType, String beerDescription, String image, int breweryId) {
-        this.beerId = beerId;
-        this.beerName = beerName;
-        this.abv = abv;
-        this.beerType = beerType;
-        this.beerDescription = beerDescription;
-        this.image = image;
-        this.breweryId = breweryId;
-    }
+    private double abv;
+    private String beerType;
 
     public Beers() {
 
+    }
+
+    public Beers(int beerId, String beerName, String beerDescription, String image, double abv, String beerType) {
+        this.beerId = beerId;
+        this.beerName = beerName;
+        this.beerDescription = beerDescription;
+        this.image = image;
+        this.abv = abv;
+        this.beerType = beerType;
     }
 
     public int getBeerId() {
@@ -70,13 +67,5 @@ public class Beers {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public int getBreweryId() {
-        return breweryId;
-    }
-
-    public void setBreweryId(int breweryId) {
-        this.breweryId = breweryId;
     }
 }
