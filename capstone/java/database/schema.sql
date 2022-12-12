@@ -20,10 +20,11 @@ CREATE TABLE users (
 -- Breweries table
 CREATE TABLE breweries (
     brewery_id SERIAL,
+    api_id varchar(50),
     brewer_id int,
     name varchar(250) NOT NULL,
-    phone varchar(20) UNIQUE NOT NULL,
-    url varchar(250) UNIQUE NOT NULL,
+    phone varchar(20),
+    url varchar(250),
     street varchar(100),
     city varchar(100),
     state varchar(50),

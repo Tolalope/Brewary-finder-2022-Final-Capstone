@@ -13,6 +13,16 @@ public class Brewery {
     private String city;
     private String state;
 
+    public String getApiId() {
+        return apiId;
+    }
+
+    public void setApiId(String apiId) {
+        this.apiId = apiId;
+    }
+
+    private String apiId;
+
     public Brewery() {
 
     }

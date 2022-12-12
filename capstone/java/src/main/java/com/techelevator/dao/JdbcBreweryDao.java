@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Brewery;
 import com.techelevator.model.Beers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -16,12 +17,13 @@ public class JdbcBreweryDao implements BreweryDao{
 
     public JdbcBreweryDao(JdbcTemplate jdbcTemplate){ this.jdbcTemplate = jdbcTemplate; }
 
+    @Autowired
     private BeersDao beersDao;
 
     @Override
     public List<Brewery> getAllBreweries() {
         List<Brewery> breweries = new ArrayList<>();
-        String sql = "SELECT brewery_id, name, street, city, state, phone, url " +
+        String sql = "SELECT brewery_id, name, street, city, state, phone, url, api_id " +
                      "FROM breweries";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -33,13 +35,13 @@ public class JdbcBreweryDao implements BreweryDao{
         return breweries;
     }
     @Override
-    public void insertBrewery(Brewery brewery) {
-        String insertBrewerySql = "INSERT INTO breweries (name, street, city, state, phone, url " +
+    public Brewery insertBrewery(Brewery brewery) {
+        String insertBrewerySql = "INSERT INTO breweries (name, street, city, state, phone, url, api_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?) " +
                 "RETURNING brewery_id";
         Integer newBreweryId;
-        newBreweryId = jdbcTemplate.queryForObject(insertBrewerySql, Integer.class, brewery.getId(), brewery.getName(), brewery.getStreet(),
-                brewery.getCity(), brewery.getState(), brewery.getPhone(), brewery.getUrl());
+        newBreweryId = jdbcTemplate.queryForObject(insertBrewerySql, Integer.class, brewery.getName(), brewery.getStreet(),
+                brewery.getCity(), brewery.getState(), brewery.getPhone(), brewery.getUrl(), brewery.getId());
 
         List <Beers> beersList = new ArrayList<>();
         beersList = beersDao.getAllBeers();
@@ -47,6 +49,7 @@ public class JdbcBreweryDao implements BreweryDao{
         for(Beers beer : beersList) {
             beersDao.insertBeersToBrewery(newBreweryId, beer.getBeerId());
         }
+        return getBreweryById(newBreweryId);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class JdbcBreweryDao implements BreweryDao{
 
     @Override
     public boolean searchForBrewery(String name) {
-        String searchForBrewerySql = "SELECT brewery_id, name, street, city, state, phone, url" +
+        String searchForBrewerySql = "SELECT brewery_id, name, street, city, state, phone, url, api_id " +
                 "FROM breweries " +
                 "WHERE name = ?";
 
@@ -75,7 +78,7 @@ public class JdbcBreweryDao implements BreweryDao{
     @Override
     public Brewery getBreweryById(int id) {
         Brewery brewery = new Brewery();
-        String getBreweryByIdSql = "SELECT brewery_id, name, street, city, state, phone, url " +
+        String getBreweryByIdSql = "SELECT brewery_id, name, street, city, state, phone, url, api_id " +
                 "FROM breweries " +
                 "WHERE brewery_id = ?";
 
@@ -90,7 +93,7 @@ public class JdbcBreweryDao implements BreweryDao{
     @Override
     public Brewery getBreweryByName(String name) {
         Brewery brewery = new Brewery();
-        String getBreweryByNameSql = "SELECT brewery_id, name, street, city, state, phone, url " +
+        String getBreweryByNameSql = "SELECT brewery_id, name, street, city, state, phone, url, api_id " +
                 "WHERE name = ?";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(getBreweryByNameSql, name);
@@ -110,6 +113,8 @@ public class JdbcBreweryDao implements BreweryDao{
         brewery.setState(results.getString("state"));
         brewery.setPhone(results.getString("phone"));
         brewery.setUrl(results.getString("url"));
+        brewery.setApiId(results.getString("api_id"));
+
 
         return brewery;
     }

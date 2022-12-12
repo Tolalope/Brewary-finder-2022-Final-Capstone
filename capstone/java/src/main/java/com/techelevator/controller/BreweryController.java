@@ -41,9 +41,14 @@ public class BreweryController {
         return api.getBreweries(zip, name, city, state);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll")
     @RequestMapping(path = "/add-brewery", method = RequestMethod.POST)
-    public void addBrewery(@RequestBody @Valid Brewery newBrewery) {
-        breweryDao.insertBrewery(newBrewery);
+    public Brewery addBrewery(@RequestBody @Valid Brewery newBrewery) {
+        return breweryDao.insertBrewery(newBrewery);
+    }
+
+    @RequestMapping(path = "/breweries/{id}", method = RequestMethod.GET)
+    public Brewery getBreweryById(@PathVariable int id) {
+        return breweryDao.getBreweryById(id);
     }
 }

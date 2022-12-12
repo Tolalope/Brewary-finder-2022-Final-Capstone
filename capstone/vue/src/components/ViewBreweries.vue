@@ -1,17 +1,13 @@
 <template>
 
  <div>
-      
-
       <h2>List of Breweries</h2>
       <div id = "brewery-list">
-      <p v-for="brewery in breweries" v-bind:key="brewery.id">{{brewery.name}}</p>
+      <p v-on:click="goToBrewery(brewery)" v-for="brewery in breweries" v-bind:key="brewery.id">{{brewery.name}}</p>
       </div>
-
-
 <div>
                 <h2>Search for Breweries</h2>
-                  <Label for="breweryName" class="sr-only">Brewery Name</Label>
+                  <label for="breweryName" class="sr-only">Brewery Name</label>
                   <input
                     id="breweryName"
                     name="breweryName"
@@ -28,23 +24,23 @@
 
                 <div>
                 
-                  <Label for="breweryZip" class="sr-only">Zip Code</Label>
+                  <label for="breweryCity" class="sr-only">City</label>
                   <input
-                    id="breweryZip"
-                    name="breweryZip"
+                    id="breweryCity"
+                    name="breweryCity"
                     type="text"
                     className="form-control"
                     required
                     autofocus
-                    v-model="zip"
+                    v-model="city"
                   />
-                  <button id="breweryZip" v-on:click="getBreweries">Submit</button>
+                  <button id="breweryCity" v-on:click="getBreweries">Submit</button>
                 
                 </div>
 
                 <div>
                 
-                  <Label for="breweryState" class="sr-only">State</Label>
+                  <label for="breweryState" class="sr-only">State</label>
                   <input
                     id="breweryState"
                     name="breweryState"
@@ -59,25 +55,22 @@
 
                 <div>
                 
-                  <Label for="breweryCity" class="sr-only">City</Label>
+                  <label for="breweryZip" class="sr-only">Zip Code</label>
                   <input
-                    id="breweryCity"
-                    name="breweryCity"
+                    id="breweryZip"
+                    name="breweryZip"
                     type="text"
                     className="form-control"
                     required
                     autofocus
-                    v-model="city"
+                    v-model="zip"
                   />
-                  <button id="breweryCity" v-on:click="getBreweries">Submit</button>
+                  <button id="breweryZip" v-on:click="getBreweries">Submit</button>
                 
                 </div>
+
       
   </div>
-      
-  
-
-  
 
 </template>
   
@@ -116,15 +109,23 @@ export default {
                 this.breweries = response.data
             } 
         )  
+        },
+
+        goToBrewery(brewery) {
+            BreweryService.saveBrewery(brewery).then(
+              (response) => {
+
+                this.$router.push({name: 'brewery-details', params: {id : response.data.id}})
+            }   
+            )
+
         }
 
 
 
     },
     created(){
-        this.viewBreweries(),
-        this.getBreweries() 
-        
+        this.viewBreweries()  
     }
 
 

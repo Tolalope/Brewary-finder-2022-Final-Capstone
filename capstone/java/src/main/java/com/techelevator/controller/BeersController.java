@@ -65,7 +65,7 @@ public class BeersController {
 
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/breweries/{breweryId}/beers", method = RequestMethod.GET)
-    public List<Beers> getAllBeersByBrewery(@RequestParam(defaultValue = "0", required = true) int breweryId) {
+    public List<Beers> getAllBeersByBrewery(@PathVariable(required = true) int breweryId) {
         return beersDao.getAllBeersByBrewery(breweryId);
     }
 

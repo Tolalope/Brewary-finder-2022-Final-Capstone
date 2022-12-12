@@ -3,21 +3,30 @@ import axios from 'axios';
 export default {
 
   viewBreweries(){
-    return axios.get('/searchBreweries')
+    return axios.get('/search-breweries')
   },
   getBreweries(zip, name, city, state) {
     if(zip.length > 0) {
-    return axios.get('/searchBreweries?zip=' + zip)
+    return axios.get('/search-breweries?zip=' + zip)
     }
     if(name.length > 0) {
-    return axios.get('/searchBreweries?name=' + name)
+    return axios.get('/search-breweries?name=' + name)
     }
     if(city.length > 0) {
-    return axios.get('/searchBreweries?city=' + city)
+    return axios.get('/search-breweries?city=' + city)
     }
     if(state.length >0) {
-    return axios.get('/searchBreweries?state=' + state)
+    return axios.get('/search-breweries?state=' + state)
     }
   },
+  saveBrewery(brewery) {
+    return axios.post('/add-brewery', brewery)
+  },
+  getBreweryById(id) {
+    return axios.get('/breweries/' + id)
+  },
+  getBeers(id) {
+    return axios.get('breweries/' + id + '/beers')
+  }
   
 }
