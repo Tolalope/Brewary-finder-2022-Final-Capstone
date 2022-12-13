@@ -27,6 +27,9 @@ export default {
   },
   getBeers(id) {
     return axios.get('breweries/' + id + '/beers')
+  },
+  createReview(newReview) {
+    return axios.post("/review", newReview)
   }
   
 }

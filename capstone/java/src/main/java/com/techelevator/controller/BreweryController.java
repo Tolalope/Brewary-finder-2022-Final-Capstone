@@ -46,7 +46,7 @@ public class BreweryController {
     public Brewery addBrewery(@RequestBody @Valid Brewery newBrewery) {
         return breweryDao.insertBrewery(newBrewery);
     }
-
+    @PreAuthorize("permitAll")
     @RequestMapping(path = "/breweries/{id}", method = RequestMethod.GET)
     public Brewery getBreweryById(@PathVariable int id) {
         return breweryDao.getBreweryById(id);
