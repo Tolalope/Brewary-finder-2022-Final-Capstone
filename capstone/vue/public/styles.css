@@ -1,5 +1,11 @@
 h1 {
-    color:ghostwhite;
+    color:darkgoldenrod;
+    font-weight: bold;
+    font-family: Ink Free;
+}
+h2 {
+  font-family: Ink Free;
+  color: darkgoldenrod;
 }
 
 body {

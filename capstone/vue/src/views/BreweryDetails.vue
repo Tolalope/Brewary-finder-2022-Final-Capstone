@@ -1,14 +1,17 @@
 <template>
 <div>
-<p >{{brewery.name}}</p>
-<p class="brewaryName" v-for="beer in beers" v-bind:key="beer.beerId">{{beer.beerName}}</p>
-  <div v-if="brewery.id">
-  <brewery-details v-bind:brewery="brewery" />
-  <div>
-<add-review/>
+<div class="breweryInfo" v-if="brewery.id">
+<brewery-details v-bind:brewery="brewery" />
+</div>
 
-    </div>
-  </div>
+<h2>Beer's List</h2>
+<p class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId">{{beer.beerName}}</p>
+  
+<div>
+  <add-review/>
+</div>
+
+
   </div>
 </template>
 
@@ -47,8 +50,9 @@ export default {
 </script>
 
 <style>
-.brewaryName{
-  color:whitesmoke;
+.beers-list{
+  color: white;
+  font-family: Ink Free;
 }
 
 </style>

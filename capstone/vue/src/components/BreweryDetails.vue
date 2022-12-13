@@ -8,6 +8,10 @@
           <h2 class="brewery-address" v-bind:key="brewery.id">{{brewery.street}} {{brewery.city}}, {{brewery.state}}</h2>
         </div>
 
+        <div class="phone">
+            <h3 class="brewery-phone" v-bind:key="brewery.phone">Phone: {{brewery.phone}}</h3>
+        </div>
+
         <div class="website">
             <a v-bind:href="brewery.url" target="_blank"><h3>{{brewery.url}}</h3></a>
         </div>
@@ -35,5 +39,22 @@ export default {
 </script>
 
 <style>
+.details {
+  color: darkgoldenrod;
+}
+.brewery-name {
+    font-family: Ink Free;
+    font-weight:900;
+    color: darkgoldenrod;
+    text-decoration-line: underline;
+}
+.brewery-address {
+    font-family: Ink Free;
+    color: darkgoldenrod;
+}
+.brewery-phone {
+    font-family: Ink Free;
+    color: darkgoldenrod;
+}
 
 </style>

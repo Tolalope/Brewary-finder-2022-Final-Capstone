@@ -1,7 +1,14 @@
 <template>
+<div class="container">
     <form id ="review-form" v-on:submit.prevent="addNewReview">
+        <h2 id="rating">RATE OUR BREWERY!</h2>
+        <div class="form-description">
+            <label id="leave-review" for="description">Leave a review:</label>
+            <textarea id="description" v-model="newReview.description" placeholder="Write your review..."></textarea>
+        </div>
+        
         <div class="form-rating">
-        <label for="rating">Rating</label>
+        <label for="rating">Rating:</label>
         <select id="rating" v-model.number="newReview.rating">
             <option value="1">1 Stars</option>
             <option value="2">2 Stars</option>
@@ -11,13 +18,10 @@
         </select>
         </div>
 
-        <div class="form-description">
-            <label for="beer-description">How's the Beer ?</label>
-            <textarea id ="beer-description" v-model="newReview.description"></textarea>
-        </div>
-
         <button id="submit-button" type="submit">Submit</button>
         </form>
+
+</div>
 </template>
 
 <script>
@@ -82,7 +86,7 @@ export default {
 
 <style>
 .form-rating {
-    display:flex;
+    display:inline;
     width: 200px;
     margin-left: auto;
     margin-right: auto;
@@ -90,17 +94,63 @@ export default {
 }
 .form-description {
     color: white;
+    padding-bottom: 10px;
 }
-#beer-description {
-    height: 150px;
+#description {
+    height: 50px;
     width: 200px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
+    
 }
 #submit-button {
     width: 200px;
     height: 20px;
     justify-content: center;
+}
+.container {
+  border-radius: 2px;
+  padding: 20px;
+  font-family: Ink Free;
+}
+#rating {
+    height: 24px;
+}
+
+#submit-button{
+  position:relative;
+  background-color: darkgoldenrod;
+  border: none;
+  font-size: 15px;
+  font-family: Ink Free;
+  color: #FFFFFF;
+  width: 75px;
+  height: 24px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#submit-button:after {
+  content: "";
+  background: black;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 1.8s
+}
+
+#submit-button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 5;
+  transition: 0s
 }
 </style>
