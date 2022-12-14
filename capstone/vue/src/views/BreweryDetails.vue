@@ -36,7 +36,7 @@
 <div>
   <add-review/>
 </div>
-
+  <reviews/>
   </div>
 </template>
 
@@ -45,6 +45,7 @@ import BreweryDetails from '@/components/BreweryDetails.vue'
 import AddReview from '@/components/AddReview.vue'
 import BreweryService from '@/services/BreweryService.js'
 import BreweryGallery from '@/components/BreweryGallery.vue'
+import Reviews from '@/components/Reviews.vue'
 
 
 export default {
@@ -52,6 +53,7 @@ export default {
       BreweryDetails, 
       AddReview,
       BreweryGallery,
+      Reviews,
       },
       data() {
         return {

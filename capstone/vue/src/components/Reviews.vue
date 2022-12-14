@@ -1,137 +1,30 @@
 <template>
   <div class="review-list">
     <h1>Reviews</h1>
-    <table>
-      <tbody>
-        <tr v-for="review in Reviews" :key="review.id">
-          <td class="id"></td>
-          <td></td>
-          <div id="beerimage">
-          <td ><img :src="beer.image" /></td></div>
-          <td id="beername">{{ beer.beerName }}</td>
-          <td id="description">{{ beer.beerDescription }}</td>
-          <td id="abv">{{ beer.abv }}% abv</td>
-          <td>
-            <button v-on:click.prevent="favoriteBeer(beer)" v-if="$store.state.user.role == 'ROLE_USER'">
-              Add to Favorites
-            </button>
-            <button v-on:click.prevent="addReview(beer.beerId)" v-if="$store.state.user.role == 'ROLE_USER'">
-              Add Review
-            </button>
-            <button v-on:click.prevent="deleteABeer(beer.beerId)" v-if="$store.state.user.role == 'ROLE_BREWER'">Remove Beer</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div
+      class="review"
+      v-for="review in $store.state.reviews"
+      v-bind:key="review.id"
+    >
+    </div>
+  <h4>{{ review.reviewer }}</h4>
+      <div class="rating">
+       {{review.rating}}
+        
+      </div>
+      <h3>{{ review.description }}</h3>
+
   </div>
 </template>
 
 <script>
-import applicationService from "../services/ApplicationService";
 export default {
-  name: 'reviews-display',
+  name: 'reviews',
   data() {
-    return {
-      breweries: [],
-      beers: [],
-      beer: {
-        beerId: "",
-        breweryId: "",
-          beerName: "",
-          beerDescription: "",
-          image: "",
-          beerType: "",
-          abv: "",
-          
-      },
       
-    };
-  },
-  methods: {
-    viewBrewery(id) {
-      this.$router.push(`/breweries/${id}`);
-    },
-    deleteABeer(id) {
-      if (
-        confirm(
-          "Are you sure you want to delete this brewery and all associated information? This action cannot be undone."
-        )
-      ) {
-        applicationService
-          .deleteBeer(id)
-          .then((response) => {
-            if (response.status === 200) {
-              alert("Beer successfully deleted");
-              this.getBeers();
-               this.$store.commit("DELETE_BEER", id);
-            }
-          })
-          .catch((error) => {
-            if (error.response.status === 404) {
-              this.$router.push("/404");
-            } else {
-              console.error(error);
-            }
-          });
-      }
-    },
-    getBeers() {
-      applicationService
-        .getBeer()
-        .then((response) => {
-          if (response.status == 200) {
-            this.$store.commit("SET_BEERS", response.data);
-            this.beers = response.data;
-          }
-        })
-        .catch((error) => {
-          if (error.response.status === 404) {
-            this.$router.push("/404");
-          } else {
-            console.error(error);
-          }
-        });
-    },
-    getBeersByBreweryId() {
-      applicationService
-        .getBeerByBreweryId(this.$store.state.activeBrewery.id)
-        .then((response) => {
-          if (response.status == 200) {
-            this.$store.commit("SET_BEERS", response.data);
-            this.beers = response.data;
-          }
-        })
-        .catch((error) => {
-          if (error.response.status === 404) {
-            this.$router.push("/404");
-          } else {
-            console.error(error);
-          }
-        });
-    },
-    addReview(id){
-      applicationService.getBeerById(id)
-      .then((response) => {
-        if (response.status == 200) {
-            this.$store.commit("SET_ACTIVE_BEER", response.data);
-            this.beer = response.data;
-            this.$router.push({name: "reviewform"});
-      }
-      });
-    },
-    favoriteBeer(name){
-      this.$store.commit("SET_FAVORITES", name);
     }
-  },
-  created() {
-    this.getBeersByBreweryId();
-  },
-  computed: {
-    sortedBeers() {
-      return this.$store.state.beers;
-    },
-  },
-};
+  };
+
 </script>
 
 <style scoped>
