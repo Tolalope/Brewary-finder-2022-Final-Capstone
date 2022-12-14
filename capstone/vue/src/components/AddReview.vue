@@ -1,7 +1,7 @@
 <template>
 <div class="review-container">
  
-<h1 id="review-heading">- READ OUR REVIEWS -</h1>
+<h1 id="review-heading">-- READ OUR REVIEWS --</h1>
     <div
       class="review"
       v-for="review in reviews"
@@ -15,11 +15,11 @@
         <h2 id="rating">RATE OUR BREWERY!</h2>
         <div class="form-description">
             <label id="leave-review" for="description">Leave a review:</label>
-            <textarea id="description" v-model="newReview.description" placeholder="Write your review..."></textarea>
+            <textarea id="description" v-model="newReview.description" placeholder="Write your review here..."></textarea>
         </div>
        
         <div class="form-rating">
-        <label id="rating" for="rating">Rating:</label>
+        <label id="leave-rating" for="rating">Rating:</label>
         <select id="rating" v-model.number="newReview.rating">
             <option value="1">1 Stars</option>
             <option value="2">2 Stars</option>
@@ -104,6 +104,7 @@ export default {
 .form-description {
     color: white;
     padding-bottom: 10px;
+    
 }
 #description {
     height: 50px;
@@ -125,7 +126,8 @@ export default {
 }
 #rating {
     height: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    text-decoration-line: underline;
 }
  
 #submit-button{
@@ -177,8 +179,15 @@ export default {
 }
 #leave-review {
     margin-right: 5px;
+    font-weight: bold;
+    font-size: 22px;
+
 }
-#rating {
+#leave-rating {
     margin-right: 5px;
+    font-weight: bold;
+    font-size: 20px;
+
+
 }
 </style>
