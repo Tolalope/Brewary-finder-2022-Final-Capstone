@@ -33,11 +33,9 @@
 </table>
 
 
-
 <div>
   <add-review/>
 </div>
-
 
   </div>
 </template>
@@ -53,8 +51,7 @@ export default {
   components: { 
       BreweryDetails, 
       AddReview,
-      BreweryGallery
-   
+      BreweryGallery,
       },
       data() {
         return {

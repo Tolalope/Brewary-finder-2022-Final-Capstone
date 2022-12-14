@@ -1,9 +1,9 @@
 <template>
-  <div class="beer-list">
-    <h1> </h1>
+  <div class="review-list">
+    <h1>Reviews</h1>
     <table>
       <tbody>
-        <tr v-for="review in sortedReviews" :key="review.id">
+        <tr v-for="review in Reviews" :key="review.id">
           <td class="id"></td>
           <td></td>
           <div id="beerimage">
@@ -29,6 +29,7 @@
 <script>
 import applicationService from "../services/ApplicationService";
 export default {
+  name: 'reviews-display',
   data() {
     return {
       breweries: [],
@@ -46,7 +47,6 @@ export default {
       
     };
   },
-  name: "breweries-list",
   methods: {
     viewBrewery(id) {
       this.$router.push(`/breweries/${id}`);
@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style scoped>
-#beer-list {
+#review-list {
   display: flex;
   justify-content: space-evenly;
 }
