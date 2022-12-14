@@ -19,7 +19,7 @@
         </div>
        
         <div class="form-rating">
-        <label for="rating">Rating:</label>
+        <label id="rating" for="rating">Rating:</label>
         <select id="rating" v-model.number="newReview.rating">
             <option value="1">1 Stars</option>
             <option value="2">2 Stars</option>
@@ -174,5 +174,11 @@ export default {
 }
 #review-form {
     margin-block: 20px;
+}
+#leave-review {
+    margin-right: 5px;
+}
+#rating {
+    margin-right: 5px;
 }
 </style>

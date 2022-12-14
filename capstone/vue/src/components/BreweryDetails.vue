@@ -47,6 +47,7 @@ export default {
     font-weight:900;
     color: darkgoldenrod;
     letter-spacing: 5px;
+    margin-top: 10px;
 }
 .brewery-address {
     font-family: Ink Free;

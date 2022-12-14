@@ -117,6 +117,7 @@ input::placeholder {
   margin: 0;
 }
 input {
+  font-family: Ink Free;
   display: block;
   height: 50px;
   width: 50vw;
@@ -151,6 +152,8 @@ h1 {
   color: darkgoldenrod;
   text-decoration: underline overline;
   text-decoration-style:solid;
+  letter-spacing: 15px;
+
 }
 h2 {
   font-weight: bolder;
@@ -158,15 +161,19 @@ h2 {
   color: darkgoldenrod;
 }
 #sign-in {
+  font-family: Ink Free;
+  text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
   margin-top: 2%;
   width: 51.3vw;
   height: 6vh;
   border: 2px solid rgba(255, 255, 255, 0.1);
   color: darkgoldenrod;
-  font-size: 130%;
+  font-size: 150%;
   font-weight: bold;
   background-color: black;
   cursor: pointer;
+  letter-spacing: 5px;
+
 }
 #login.text-center {
   width: 50vw;
@@ -202,6 +209,7 @@ h2 {
 }
 
 .text {
+  font-family: Ink Free;
   color: darkgoldenrod;
   font-size: 50px;
   font-weight: bold;
@@ -215,4 +223,8 @@ h2 {
   text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
 }
 
+#username, #password {
+    font-weight: bold;
+
+}
 </style>
