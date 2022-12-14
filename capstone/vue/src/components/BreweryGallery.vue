@@ -2,22 +2,22 @@
 <div class="container">
             <div class="gallery">
                 <figure class="gallery__item gallery__item--1">
-                    <img src="https://www.crowneknox.com/resourcefiles/blogsmallimages/fun-things-to-do-in-knoxville-breweries-with-beer-gardens.jpg" alt="Gallery image 1" class="gallery__img">
+                    <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/colorful-beer-taps-ted-pagel.jpg" alt="Gallery image 1" class="gallery__img">
                 </figure>
                 <figure class="gallery__item gallery__item--2">
                     <img src="https://www.newsnationnow.com/wp-content/uploads/sites/108/2022/05/BeersGettyImages-1221429432.jpg?w=1280" alt="Gallery image 2" class="gallery__img">
                 </figure>
                 <figure class="gallery__item gallery__item--3">
-                    <img src="https://media.istockphoto.com/id/1093593288/photo/close-up-of-bartender-pouring-draft-beer-in-glass.jpg?s=612x612&w=0&k=20&c=qhSKb5v13QDuotRFV2HYAsVIlTkefv6wjTFqOBEkFXo=" alt="Gallery image 3" class="gallery__img">
+                    <img src="https://www.paeats.org/wp-content/uploads/2020/07/black-is-beautiful.jpg" alt="Gallery image 3" class="gallery__img">
                 </figure>
                 <figure class="gallery__item gallery__item--4">
-                    <img src="https://theatlasheart.com/wp-content/uploads/2015/09/12-IMG_1536-775x522.jpg" alt="Gallery image 4" class="gallery__img">
+                    <img src="https://www.oldfirehousebrewery.com/wp-content/uploads/2021/01/Spiral-Brewing-Company-Photo-by-Aaron-Davidson-311-e1523917423217.jpg" alt="Gallery image 4" class="gallery__img">
                 </figure>
                 <figure class="gallery__item gallery__item--5">
-                    <img src="https://d37xww59oglu30.cloudfront.net/general/home-hero-taps.jpg" alt="Gallery image 5" class="gallery__img">
+                    <img src="https://wwmt.com/resources/media/595553e3-85e4-4332-bed9-b9562da9648d-large16x9_alcoholgetty.png?1657212474754" alt="Gallery image 5" class="gallery__img">
                 </figure>
                 <figure class="gallery__item gallery__item--6">
-                    <img src="https://a9p9n2x2.stackpathcdn.com/wp-content/blogs.dir/1/files/2022/02/black-owned-breweries.jpg" alt="Gallery image 6" class="gallery__img">
+                    <img src="https://s.hdnux.com/photos/01/16/44/16/20595627/4/rawImage.jpg" alt="Gallery image 6" class="gallery__img">
                 </figure>
             </div>
         </div>
