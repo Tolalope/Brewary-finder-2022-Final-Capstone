@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin
 
 public class ReviewsController {
-
+@Autowired
     private ReviewsDao reviewsDao;
 
     @PreAuthorize("permitAll")
@@ -29,7 +29,10 @@ public class ReviewsController {
     public List<Reviews> searchReviewsByBeerId(@PathVariable int beerId) {
         return reviewsDao.searchReviewsByBeerId(beerId);
     }
-
+    @GetMapping("/brewery/reviews/{breweryId}")
+    public List<Reviews> searchReviewsByBreweryId(@PathVariable int breweryId) {
+        return reviewsDao.searchReviewsByBreweryId(breweryId);
+    }
     @PreAuthorize("permitAll")
     @RequestMapping(path = "/reviews/{id}", method = RequestMethod.GET)
     public Reviews filter(@RequestParam(defaultValue = "0", required = false) int id) {

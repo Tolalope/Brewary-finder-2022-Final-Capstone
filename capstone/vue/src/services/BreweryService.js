@@ -29,7 +29,10 @@ export default {
     return axios.get('breweries/' + id + '/beers')
   },
   createReview(newReview) {
-    return axios.post("/review", newReview)
+    return axios.post("/reviews", newReview)
+  },
+  getReviewsByBreweryId(breweryId) {
+    return axios.get("/brewery/reviews/" + breweryId)
   }
   
 }

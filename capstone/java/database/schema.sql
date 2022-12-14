@@ -56,14 +56,13 @@ CREATE TABLE breweries_beers (
 CREATE TABLE reviews (
     review_id SERIAL,
     user_id int NOT NULL,
-    beer_id int NOT NULL,
+    beer_id int,
     brewery_id int NOT NULL,
     description VARCHAR(500),
     rating int NOT NULL
     CONSTRAINT CK_rating CHECK (rating <= 5),
     CONSTRAINT PK_reviews PRIMARY KEY (review_id),
     CONSTRAINT FK_users_reviews FOREIGN KEY (user_id) REFERENCES users (user_id),
-    CONSTRAINT FK_beers_reviews FOREIGN KEY (beer_id) REFERENCES beers (beer_id),
     CONSTRAINT FK_breweries_reviews FOREIGN KEY (brewery_id) REFERENCES breweries (brewery_id)
 );
 

@@ -20,7 +20,14 @@
 
         <button id="submit-button" type="submit">Submit</button>
         </form>
-
+        <h1>Reviews</h1>
+    <div
+      class="review"
+      v-for="review in reviews"
+      v-bind:key="review.id"
+    >
+    {{review.rating}}-{{review.description}}
+    </div>
 </div>
 </template>
 
@@ -39,7 +46,12 @@ export default {
                 breweryName: "",
                 description: "",
                 rating: 0
-            }
+            },
+            reviews: [
+
+            ]
+                
+            
         }
         
     },
@@ -58,17 +70,17 @@ export default {
         },
         */
         addNewReview() {
-            const userId = this.$store.state.user.userId;
-            const beerId = this.$store.state.beer.beerId;
-            const breweryName = this.$store.state.brewery.name;
-            const beerName = this.$store.state.beer.beerName;
+            const userId = this.$store.state.user.id;
+           // const beerId = this.$store.state.beer.beerId;
+            const breweryId = this.$route.params.id;
+           // const beerName = this.$store.state.beer.beerName;
             this.newReview.userId = userId;
-            this.newReview.beerId = beerId;
-            this.newReview.breweryName = breweryName;
-            this.newReview.beerName = beerName;
-            this.$store.commit("ADD_REVIEW", this.newReview);
+          //  this.newReview.beerId = beerId;
+            this.newReview.breweryId = breweryId;
+           // this.newReview.beerName = beerName;
+           // this.$store.commit("ADD_REVIEW", this.newReview);
             breweryService.createReview(this.newReview).then(() => {
-                alert("Review Created")
+                this.getReviews()
             }).catch(error => {
                 if(error.response) {
                     this.errorMsg = error.response.statusText;
@@ -79,6 +91,13 @@ export default {
                 }
             });
             this.newReview = {};
+        },
+        getReviews() {
+            breweryService.getReviewsByBreweryId(this.$route.params.id).then(
+                (response) => {
+                    this.reviews = response.data
+                }
+            )
         }
     }
 }
