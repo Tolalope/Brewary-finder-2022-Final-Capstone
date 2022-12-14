@@ -2,10 +2,13 @@ h1 {
     color:darkgoldenrod;
     font-weight: bold;
     font-family: Ink Free;
+    text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
+
 }
 h2 {
   font-family: Ink Free;
   color: darkgoldenrod;
+  text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
 }
 
 body {

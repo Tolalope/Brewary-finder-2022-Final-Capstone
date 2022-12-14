@@ -3,7 +3,17 @@
     <div id="login" class="text-center">
       <form class="form-signin" @submit.prevent="login">
         <h1>Bender BeerFinder</h1>
-        <h2> It's A Match!</h2>
+        
+        <div class="container">
+          <img src="@/assets/bender_beer_locator.png" alt="Avatar" class="image">
+            <div class="overlay">
+            <div class="text">OOOO...Issa Match!</div>
+          </div>
+        </div>
+
+
+
+
         <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
           Invalid username and password!
         </div>
@@ -139,6 +149,8 @@ h1 {
   margin-bottom: 5%;
   font-size: 300%;
   color: darkgoldenrod;
+  text-decoration: underline overline;
+  text-decoration-style:solid;
 }
 h2 {
   font-weight: bolder;
@@ -158,6 +170,49 @@ h2 {
 }
 #login.text-center {
   width: 50vw;
+}
+
+
+.container {
+  position: relative;
+  width: 98%;
+  align-content: center;
+  }
+
+.image {
+  display: block;
+  width: 98%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.container:hover .overlay {
+  width: 100%;
+}
+
+.text {
+  color: darkgoldenrod;
+  font-size: 50px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
 }
 
 </style>

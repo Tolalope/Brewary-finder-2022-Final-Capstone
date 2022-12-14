@@ -46,11 +46,15 @@ export default {
     font-family: Ink Free;
     font-weight:900;
     color: darkgoldenrod;
-    text-decoration-line: underline;
+    text-decoration: overline;
+    text-decoration-style:solid;
+    letter-spacing: 5px;
 }
 .brewery-address {
     font-family: Ink Free;
     color: darkgoldenrod;
+    text-decoration: overline;
+    text-decoration-style:wavy;
 }
 .brewery-phone {
     font-family: Ink Free;

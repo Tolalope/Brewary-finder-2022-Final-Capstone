@@ -208,7 +208,8 @@ export default {
 }
 
 #list {
-    color:ghostwhite;
+    color:white;
     text-decoration-line: underline;
+    text-shadow: 0 0 3px darkgoldenrod, 0 0 5px darkgoldenrod;
 }
 </style>

@@ -4,9 +4,34 @@
 <brewery-details v-bind:brewery="brewery" />
 </div>
 
-<h2>Beer's List</h2>
-<p class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId">{{beer.beerName}}</p>
-  
+<h2 id="beer-list-title">BEERS LIST</h2>
+
+<table>
+
+<tr>
+  <td class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId">{{beer.beerName}}</td>
+</tr>
+
+<tr>
+  <td class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId"><img src="beer.image"></td>
+</tr>
+
+<tr>
+  <td class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId">{{beer.beerType}}</td>
+</tr>
+
+<tr>
+<td class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId">ABV: {{beer.abv}}%</td>
+</tr>
+
+<tr>
+  <td class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId">{{beer.beerDescription}}</td>
+</tr>
+
+</table>
+
+
+
 <div>
   <add-review/>
 </div>
@@ -51,8 +76,21 @@ export default {
 
 <style>
 .beers-list{
-  color: white;
+  color: ghostwhite;
   font-family: Ink Free;
 }
+
+table, th, td {
+  border: 1px solid;
+  text-shadow: 2px 2px black;
+  text-align:center;
+}
+table:hover {
+  background-color: rgb(116, 59, 6);
+}
+#beer-list-title {
+  text-align: center;
+}
+
 
 </style>
