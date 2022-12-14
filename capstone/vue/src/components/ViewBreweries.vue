@@ -1,11 +1,12 @@
 <template>
-<body>
+<body class="list-breweries">
 <div>
       <h2 id ="list">List of Breweries</h2>
       <div id = "brewery-list">
-      <p v-on:click="goToBrewery(brewery)" v-for="brewery in breweries" v-bind:key="brewery.id">{{brewery.name}}</p>
+      <p class= "breweries" v-on:click="goToBrewery(brewery)" v-for="brewery in breweries" v-bind:key="brewery.id">{{brewery.name}}</p>
 </div>
 
+<div id="search-container">
 <h2>Search for Breweries</h2>
 
 <div class="searchDiv">
@@ -66,6 +67,7 @@
                 />
                   <button class="brewerySearch" v-on:click="getBreweries">Submit</button>
                 
+</div>
 </div>
 </div>
 
@@ -209,8 +211,27 @@ export default {
 }
 
 #list {
-    color:white;
-    text-decoration-line: underline;
-    text-shadow: 0 0 3px darkgoldenrod, 0 0 5px darkgoldenrod;
+    color:darkgoldenrod;
+    text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
+    font-size: 40px;
+    outline: 5px double darkgoldenrod;
+    width: 24%;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom:20px
+
+
+}
+.list-breweries {
+    height: 100vh;
+}
+
+#search-container {
+  position: absolute;
+  width: 100%;
+  margin-top: 60px
+} 
+.breweries {
+    line-height: 1.5
 }
 </style>

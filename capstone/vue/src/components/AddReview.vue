@@ -1,12 +1,23 @@
 <template>
 <div class="review-container">
+ 
+<h1 id="review-heading">- READ OUR REVIEWS -</h1>
+    <div
+      class="review"
+      v-for="review in reviews"
+      v-bind:key="review.id"
+    >
+    <h2>{{review.rating}} <img class="star-image" src="@/assets/star.png">'s:</h2>
+    <h3 id="review-description">-- {{review.description}}</h3>
+    </div>
+ 
     <form id ="review-form" v-on:submit.prevent="addNewReview">
         <h2 id="rating">RATE OUR BREWERY!</h2>
         <div class="form-description">
             <label id="leave-review" for="description">Leave a review:</label>
             <textarea id="description" v-model="newReview.description" placeholder="Write your review..."></textarea>
         </div>
-        
+       
         <div class="form-rating">
         <label for="rating">Rating:</label>
         <select id="rating" v-model.number="newReview.rating">
@@ -17,22 +28,14 @@
             <option value="5">5 Stars</option>
         </select>
         </div>
-
+ 
         <button id="submit-button" type="submit">Submit</button>
-        </form>
-        <h1>Reviews</h1>
-    <div
-      class="review"
-      v-for="review in reviews"
-      v-bind:key="review.id"
-    >
-    {{review.rating}}-{{review.description}}
-    </div>
+        </form>      
 </div>
 </template>
-
+ 
 <script>
-
+ 
 import breweryService from "@/services/BreweryService.js";
 export default {
     name: "Add-review",
@@ -48,27 +51,14 @@ export default {
                 rating: 0
             },
             reviews: [
-
+ 
             ]
-                
-            
+               
+           
         }
-        
+       
     },
     methods: {
-       /* getBeerIdFromBeerName(name) {
-            return beerService.getBeerIdFromBeerName(name).then((response) => {
-                const beerId = response.data;
-                return beerId;
-            });
-        },
-        getBreweryNameByBeerId(id) {
-            return breweryService.getBreweryNameByBeerId(id).then((response) => {
-                const breweryName = response.data;
-                return breweryName;
-            });
-        },
-        */
         addNewReview() {
             const userId = this.$store.state.user.id;
            // const beerId = this.$store.state.beer.beerId;
@@ -102,7 +92,7 @@ export default {
     }
 }
 </script>
-
+ 
 <style>
 .form-rating {
     display:inline;
@@ -121,7 +111,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
-    
+   
 }
 #submit-button {
     width: 200px;
@@ -135,8 +125,9 @@ export default {
 }
 #rating {
     height: 24px;
+    margin-bottom: 10px;
 }
-
+ 
 #submit-button{
   position:relative;
   background-color: darkgoldenrod;
@@ -152,7 +143,7 @@ export default {
   overflow: hidden;
   cursor: pointer;
 }
-
+ 
 #submit-button:after {
   content: "";
   background: black;
@@ -165,11 +156,23 @@ export default {
   opacity: 0;
   transition: all 1.8s
 }
-
+ 
 #submit-button:active:after {
   padding: 0;
   margin: 0;
   opacity: 5;
   transition: 0s
+}
+ 
+#review-description {
+    font-family: Ink Free;
+    color: black;
+    text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
+}
+.star-image {
+    width: 20px;
+}
+#review-form {
+    margin-block: 20px;
 }
 </style>
