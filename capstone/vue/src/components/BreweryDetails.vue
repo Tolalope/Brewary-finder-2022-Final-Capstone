@@ -13,7 +13,7 @@
         </div>
 
         <div class="website">
-            <a v-bind:href="brewery.url" target="_blank"><h3>{{brewery.url}}</h3></a>
+            <a bind:href="brewery.url" target="_blank"><h3>{{brewery.url}}</h3></a>
         </div>
 
   </div>

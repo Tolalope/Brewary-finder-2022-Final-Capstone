@@ -1,5 +1,5 @@
 <template>
-
+<body>
 <div>
       <h2 id ="list">List of Breweries</h2>
       <div id = "brewery-list">
@@ -69,8 +69,9 @@
 </div>
 </div>
 
-      
+    
 </div>
+</body>
 </template>
   
 

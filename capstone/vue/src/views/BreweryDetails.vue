@@ -15,7 +15,7 @@
 </tr>
 
 <tr>
-  <td class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId"><img src="beer.image"></td>
+  <td class="beers-list" v-for="beer in beers" v-bind:key="beer.beerId"><img class="beer-image" v-bind:src="beer.image"></td>
 </tr>
 
 <tr>
@@ -90,7 +90,7 @@ table, th, td {
   text-shadow: 2px 2px black;
   text-align:center;
 }
-table:hover {
+table {
   background-color: rgb(116, 59, 6);
 }
 #beer-list-title {
@@ -98,6 +98,10 @@ table:hover {
   font-family: Ink Free;
   color: black;
   text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
+}
+
+.beer-image{
+  width: 100px;
 }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="review-container">
     <form id ="review-form" v-on:submit.prevent="addNewReview">
         <h2 id="rating">RATE OUR BREWERY!</h2>
         <div class="form-description">
@@ -109,7 +109,7 @@ export default {
     height: 20px;
     justify-content: center;
 }
-.container {
+.review-container {
   border-radius: 2px;
   padding: 20px;
   font-family: Ink Free;

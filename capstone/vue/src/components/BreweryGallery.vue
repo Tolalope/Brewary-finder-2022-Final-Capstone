@@ -1,5 +1,4 @@
 <template>
-  <body>
 <div class="container">
             <div class="gallery">
                 <figure class="gallery__item gallery__item--1">
@@ -22,7 +21,6 @@
                 </figure>
             </div>
         </div>
-        </body>
 </template>
 
 <script>
