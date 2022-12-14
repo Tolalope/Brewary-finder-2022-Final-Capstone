@@ -4,6 +4,8 @@
 <brewery-details v-bind:brewery="brewery" />
 </div>
 
+<brewery-gallery />
+
 <h2 id="beer-list-title">BEERS LIST</h2>
 
 <table>
@@ -44,11 +46,14 @@
 import BreweryDetails from '@/components/BreweryDetails.vue'
 import AddReview from '@/components/AddReview.vue'
 import BreweryService from '@/services/BreweryService.js'
+import BreweryGallery from '@/components/BreweryGallery.vue'
 
 
 export default {
   components: { 
-      BreweryDetails, AddReview
+      BreweryDetails, 
+      AddReview,
+      BreweryGallery
    
       },
       data() {
@@ -90,7 +95,9 @@ table:hover {
 }
 #beer-list-title {
   text-align: center;
+  font-family: Ink Free;
+  color: black;
+  text-shadow: 0 0 3px red, 0 0 5px darkgoldenrod;
 }
-
 
 </style>
